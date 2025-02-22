@@ -14,8 +14,13 @@ namespace CapaEntidades
 
         public string apellidoPaciente { get; set; }
 
-        public DateOnly fechaNacimiento { get; set; } // DateOnly is a new type in C# 9.0
+        public DateOnly fechaNacimientoPaciente { get; set; } // DateOnly is a new type in C# 9.0
 
+        public string telefonoPaciente { get; set; }
+
+        public string emailPaciente { get; set; }
+
+        public string direccionPaciente { get; set; }
 
     }
 }
