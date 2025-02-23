@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Sistema_Gestion_Hospitalaria.Models;
 
-namespace Sistema_Gestion_Hospitalaria.Controllers
+namespace CapaPresentacion.Controllers
 {
     public class HomeController : Controller
     {

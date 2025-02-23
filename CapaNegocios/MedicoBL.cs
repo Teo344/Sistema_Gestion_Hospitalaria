@@ -17,9 +17,9 @@ namespace CapaNegocios
             _medicoDAL = medicoDAL;
         }
 
-        public List<MedicoCLS> ObtenerTodos()
+        public List<MedicoCLS> ObtenerMedicos()
         {
-            return _medicoDAL.ObtenerTodos();
+            return _medicoDAL.ObtenerMedicos();
         }
 
         public MedicoCLS ObtenerPorId(int id)
