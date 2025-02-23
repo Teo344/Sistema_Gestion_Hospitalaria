@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace CapaEntidades
 {
-    public class FacturacionCLS
+    public class CitaCLS
     {
         public int Id { get; set; }
         public int PacienteId { get; set; }
-        public decimal Monto { get; set; }
-        public string MetodoPago { get; set; }
-        public DateOnly FechaPago { get; set; }
+        public int MedicoId { get; set; }
+        public DateTime FechaHora { get; set; }
+        public string Estado { get; set; }
 
-        // Relación con Paciente
+        // Relaciones
         public PacienteCLS Paciente { get; set; }
+        public MedicoCLS Medico { get; set; }
     }
 }

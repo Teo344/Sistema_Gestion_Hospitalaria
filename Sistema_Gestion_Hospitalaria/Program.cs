@@ -1,4 +1,15 @@
+
+using CapaDatos;
+using CapaNegocios;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<PacienteDAL>();  // Registrar PacienteDAL
+builder.Services.AddScoped<PacienteBL>();   // Registrar PacienteBL
+
+builder.Services.AddDbContext<HospitalDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
