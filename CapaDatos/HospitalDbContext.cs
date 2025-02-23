@@ -13,33 +13,46 @@ namespace CapaDatos
         public DbSet<CitaCLS> Citas { get; set; }
         public DbSet<TratamientoCLS> Tratamientos { get; set; }
         public DbSet<FacturacionCLS> Facturaciones { get; set; }
+        public DbSet<AdministradorCLS> Administradores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MedicoCLS>()
-                .HasOne<EspecialidadCLS>()
+                .HasOne(m => m.Especialidad)
                 .WithMany()
                 .HasForeignKey(m => m.EspecialidadId);
 
             modelBuilder.Entity<CitaCLS>()
-                .HasOne<PacienteCLS>()
+                .HasOne(c => c.Paciente)
                 .WithMany()
                 .HasForeignKey(c => c.PacienteId);
 
             modelBuilder.Entity<CitaCLS>()
-                .HasOne<MedicoCLS>()
+                .HasOne(c => c.Medico)
                 .WithMany()
                 .HasForeignKey(c => c.MedicoId);
 
             modelBuilder.Entity<TratamientoCLS>()
-                .HasOne<PacienteCLS>()
+                .HasOne(t => t.Paciente)
                 .WithMany()
                 .HasForeignKey(t => t.PacienteId);
 
             modelBuilder.Entity<FacturacionCLS>()
-                .HasOne<PacienteCLS>()
+                .HasOne(f => f.Paciente)
                 .WithMany()
                 .HasForeignKey(f => f.PacienteId);
+
+            modelBuilder.Entity<PacienteCLS>()
+                .HasIndex(p => p.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<MedicoCLS>()
+                .HasIndex(m => m.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<AdministradorCLS>()
+                .HasIndex(a => a.Email)
+                .IsUnique();
         }
     }
 }

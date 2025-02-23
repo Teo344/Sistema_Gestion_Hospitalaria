@@ -2,8 +2,9 @@
 using CapaEntidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CapaDatos;
 
-namespace Sistema_Gestion_Hospitalaria.Controllers
+namespace CapaPresentacion.Controllers
 {
     public class PacienteController : Controller
     {
@@ -24,5 +25,14 @@ namespace Sistema_Gestion_Hospitalaria.Controllers
             return _pacienteBL.ObtenerPacientes();
         }
 
+        public List<PacienteCLS> FiltrarPaciente(PacienteCLS objPaciente)
+        {
+            return _pacienteBL.FiltrarPaciente(objPaciente);
+        }
+
+        public int AgregarPaciente(PacienteCLS paciente)
+        {
+            return _pacienteBL.AgregarPaciente(paciente);
+        }
     }
 }
