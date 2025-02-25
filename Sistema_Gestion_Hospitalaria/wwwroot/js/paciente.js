@@ -7,8 +7,8 @@ let objPacientes;
 async function ObtenerPacientes() {
     objPacientes = {
         url: "Paciente/ObtenerPacientes",
-        cabeceras: ["Id Paciente", "Nombre", "Apellido", "Fecha de Nacimiento", "Teléfono", "Correo Electrónico", "Dirección"],
-        propiedades: ["id", "nombre", "apellido", "fechaNacimiento", "telefono", "email", "direccion"],
+        cabeceras: ["Id Paciente", "Documento de Identificacion", "Nombre", "Apellido", "Fecha de Nacimiento", "Teléfono", "Correo Electrónico", "Dirección"],
+        propiedades: ["id", "identificacion", "nombre", "apellido", "fechaNacimiento", "telefono", "email", "direccion"],
         divContenedorTabla: "divContenedorTabla",
         editar: true,
         eliminar: true
@@ -26,14 +26,20 @@ function buscarPaciente() {
 }
 
 function agregarPaciente() {
-    let form = document.getElementById("formBusquedaPaciente");
+    let form = document.getElementById("formAgregarPaciente");
     let frm = new FormData(form);
 
     fetchPost("Paciente/AgregarPaciente", "text", frm, function (data) {
         ObtenerPacientes();
-        limpiarDatos("formBusquedaSucursal");
+        limpiarDatos("formAgregarPaciente");
+
+        let modalElement = document.getElementById("modalAgregarPaciente");
+        let modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+        modalInstance.hide();
+
     });
 }
+
 
 function limpiarPaciente() {
     limpiarDatos("formBusquedaPaciente");

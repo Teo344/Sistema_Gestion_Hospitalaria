@@ -3,14 +3,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Paciente</h1>
+<h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+    </svg> Gestion de Pacientes
+</h1>
+
+<button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarPaciente">
+    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+    </svg> Agregar Nuevo
+</button>
 
 <fieldset class="p-3 my-3 border border-primary rounded">
-    <legend class="float-none w-auto text-primary fw-bold">Pacientes</legend>
+    <legend class="float-none w-auto text-primary fw-bold">Buscar Pacientes</legend>
     <form id="formBusquedaPaciente" method="post" class="row g-3">
         <div class="col-md-4">
             <label for="id" class="form-label">Id Paciente</label>
             <input type="text" class="form-control" name="id" readonly placeholder="Generado Automáticamente">
+        </div>
+        <div class="col-md-4">
+            <label for="identificacion" class="form-label">Identificacion</label>
+            <input type="text" class="form-control" name="identificacion" placeholder="Ingrese el numero de cedula">
         </div>
         <div class="col-md-4">
             <label for="nombre" class="form-label">Nombre</label>
@@ -32,7 +47,7 @@
             <label for="telefono" class="form-label">Teléfono</label>
             <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono">
         </div>
-        <div class="col-md-12">
+        <div class="col-md-8">
             <label for="direccion" class="form-label">Dirección</label>
             <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección">
         </div>
@@ -47,19 +62,66 @@
                     <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
                 </svg> Limpiar
             </button>
-            <button type="button" class="btn btn-success" onclick="agregarPaciente()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
-                </svg> Agregar Nuevo
-            </button>
         </div>
     </form>
 </fieldset>
 
+<!-- Modal para agregar un nuevo paciente -->
+<div class="modal fade" id="modalAgregarPaciente" tabindex="-1" aria-labelledby="modalAgregarPacienteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarPacienteLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                    </svg> Agregar Nuevo Paciente
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarPaciente" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="identificacion" class="form-label">Identificación</label>
+                        <input type="text" class="form-control" name="identificacion" placeholder="Ingrese el número de cédula" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" name="fechanacimiento" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" placeholder="Ingrese el correo" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarPaciente()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<div id="divTable" class="mt-5">
+
+<div id="divTable" class="mt-4">
 </div>
 
 <script src="~/js/generico.js"></script>
