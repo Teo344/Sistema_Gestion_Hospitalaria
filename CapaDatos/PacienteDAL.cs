@@ -58,14 +58,22 @@ namespace CapaDatos
         }
 
 
-        public void Actualizar(PacienteCLS paciente)
+         public PacienteCLS RecuperarPaciente(int id)
         {
-            _context.Database.ExecuteSqlRaw("EXEC uspActualizarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6",
-                paciente.Id, paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
-                paciente.Telefono, paciente.Email, paciente.Direccion);
+            return _context.Pacientes
+                .FromSqlRaw("EXEC uspRecuperarPaciente @p0", id)
+                .AsEnumerable()
+                .FirstOrDefault(); // Para obtener un solo objeto en lugar de una lista
         }
 
-        public void Eliminar(int id)
+        public void ActualizarPaciente(PacienteCLS paciente)
+        {
+            _context.Database.ExecuteSqlRaw("EXEC uspActualizarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
+                paciente.Id, paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
+                paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
+        }
+
+        public void EliminarPaciente(int id)
         {
             _context.Database.ExecuteSqlRaw("EXEC uspEliminarPaciente @p0", id);
         }

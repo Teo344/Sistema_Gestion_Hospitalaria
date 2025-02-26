@@ -11,7 +11,8 @@ async function ObtenerPacientes() {
         propiedades: ["id", "identificacion", "nombre", "apellido", "fechaNacimiento", "telefono", "email", "direccion"],
         divContenedorTabla: "divContenedorTabla",
         editar: true,
-        eliminar: true
+        eliminar: true, 
+        propiedadId: "id"
     };
     pintar(objPacientes);
 }
@@ -33,15 +34,48 @@ function agregarPaciente() {
         ObtenerPacientes();
         limpiarDatos("formAgregarPaciente");
 
-        let modalElement = document.getElementById("modalAgregarPaciente");
-        let modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-        modalInstance.hide();
+        cerrarModal();
 
     });
 }
 
-
 function limpiarPaciente() {
     limpiarDatos("formBusquedaPaciente");
     ObtenerPacientes();
+}
+
+function Editar(id) {
+    fetchGet(`Paciente/RecuperarPaciente?id=${id}`, "json", function (data) {
+        if (data) {
+            // Asignar valores a los campos del formulario
+            document.querySelector("#formEditarPaciente input[name='id']").value = data.id;
+            document.querySelector("#formEditarPaciente input[name='identificacion']").value = data.identificacion;
+            document.querySelector("#formEditarPaciente input[name='nombre']").value = data.nombre;
+            document.querySelector("#formEditarPaciente input[name='apellido']").value = data.apellido;
+            document.querySelector("#formEditarPaciente input[name='fechanacimiento']").value = data.fechaNacimiento.split('T')[0]; // Formatear fecha
+            document.querySelector("#formEditarPaciente input[name='telefono']").value = data.telefono;
+            document.querySelector("#formEditarPaciente input[name='email']").value = data.email;
+            document.querySelector("#formEditarPaciente input[name='direccion']").value = data.direccion;
+
+            abrirModal("modalEditar");
+        } else {
+            alert("No se encontró el paciente.");
+        }
+    });
+}
+function editarPaciente() {
+    let form = document.getElementById("formEditarPaciente");
+    let frm = new FormData(form);
+
+    fetchPost("Paciente/ActualizarPaciente", "text", frm, function (data) {
+        ObtenerPacientes();
+        limpiarDatos("formEditarPaciente");
+        cerrarModal("modalEditar");
+    });
+}
+
+function Eliminar(id) {
+    fetchGet("Paciente/EliminarPaciente", "text", frm, function (data) {
+        ObtenerPacientes();
+    });
 }

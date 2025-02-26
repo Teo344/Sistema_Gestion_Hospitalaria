@@ -34,5 +34,21 @@ namespace CapaPresentacion.Controllers
         {
             return _pacienteBL.AgregarPaciente(paciente);
         }
+
+        public PacienteCLS RecuperarPaciente(int id)
+        {
+            return _pacienteBL.RecuperarPaciente(id);
+        }
+
+        public int ActualizarPaciente(PacienteCLS paciente)
+        {
+            _pacienteBL.ActualizarPaciente(paciente);
+            return 1; // Retorna 1 si la actualización fue exitosa
+        }
+
+        public int EliminarPaciente(int id)
+        {
+            return _pacienteBL.EliminarPaciente(id);
+        }
     }
 }
