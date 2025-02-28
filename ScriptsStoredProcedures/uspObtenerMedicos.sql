@@ -1,0 +1,5 @@
+CREATE PROCEDURE uspObtenerMedicos
+AS
+BEGIN
+    SELECT * FROM Medicos;
+END;
