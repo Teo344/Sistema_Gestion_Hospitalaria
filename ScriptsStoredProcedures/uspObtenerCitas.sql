@@ -1,0 +1,5 @@
+CREATE PROCEDURE uspObtenerCitas
+AS
+BEGIN
+    SELECT * FROM Citas;
+END;
