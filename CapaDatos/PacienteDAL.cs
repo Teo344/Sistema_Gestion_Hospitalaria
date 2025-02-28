@@ -58,7 +58,7 @@ namespace CapaDatos
         }
 
 
-         public PacienteCLS RecuperarPaciente(int id)
+        public PacienteCLS RecuperarPaciente(int id)
         {
             return _context.Pacientes
                 .FromSqlRaw("EXEC uspRecuperarPaciente @p0", id)

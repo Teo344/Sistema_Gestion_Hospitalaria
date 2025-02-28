@@ -27,7 +27,8 @@ namespace CapaNegocios
         {
             // Se valida que los datos sean correctos antes de enviarlos a la base de datos
             if (string.IsNullOrWhiteSpace(paciente.Nombre) ||
-                string.IsNullOrWhiteSpace(paciente.Apellido)){
+                string.IsNullOrWhiteSpace(paciente.Apellido))
+            {
                 return 0; // Retorna 0 si los datos no son válidos
             }
 
@@ -41,7 +42,8 @@ namespace CapaNegocios
 
         public int ActualizarPaciente(PacienteCLS paciente)
         {
-            if (paciente.Id <= 0){
+            if (paciente.Id <= 0)
+            {
                 return 0; // Retorna 0 si los datos no son válidos
             }
 
