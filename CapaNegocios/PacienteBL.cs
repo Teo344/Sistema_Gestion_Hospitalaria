@@ -33,5 +33,30 @@ namespace CapaNegocios
 
             return _pacienteDAL.AgregarPaciente(paciente);
         }
+
+        public PacienteCLS RecuperarPaciente(int id)
+        {
+            return _pacienteDAL.RecuperarPaciente(id);
+        }
+
+        public int ActualizarPaciente(PacienteCLS paciente)
+        {
+            if (paciente.Id <= 0){
+                return 0; // Retorna 0 si los datos no son válidos
+            }
+
+            _pacienteDAL.ActualizarPaciente(paciente);
+            return 1; // Retorna 1 si la actualización fue exitosa
+        }
+        public int EliminarPaciente(int id)
+        {
+            if (id <= 0)
+            {
+                return 0;
+            }
+
+            _pacienteDAL.EliminarPaciente(id);
+            return 1;
+        }
     }
 }

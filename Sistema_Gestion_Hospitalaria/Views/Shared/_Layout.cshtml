@@ -4,50 +4,135 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Gestion Hospitalaria</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Sistema_Gestion_Hospitalaria.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hospital de Quito</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paciente" asp-action="Index">Paciente</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" asp-area="" asp-controller="Home" asp-action="Index">Hospital de Quito</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-lg"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Configuración</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="#!">Cerrar Sesión</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Personas</div>
+                        <a class="nav-link" asp-area="" asp-controller="Paciente" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Pacientes
+                        </a>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Sistema_Gestion_Hospitalaria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link" asp-area="" asp-controller="Medico" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Medicos
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">Servicios</div>
+                        <a class="nav-link" asp-area="" asp-controller="Especialidad" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Especialidades
+                        </a>
+                        <a class="nav-link" asp-area="" asp-controller="Tratamiento" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Tratamientos
+                        </a>
+                        <a class="nav-link" asp-area="" asp-controller="Cita" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Citas
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Pagos</div>
+                        <a class="nav-link" asp-area="" asp-controller="Facturacion" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Facturacion
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Sesion iniciada como:</div>
+                    Administrador
+                </div>
+            </nav>
         </div>
-    </footer>
+        <input type="hidden" id="hdfOculto" value="@Url.Content("~")" />
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid p-5">
+                    @RenderBody()
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Hospital de Quito</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.classList.toggle('sb-sidenav-toggled');
+                    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+                });
+            }
+        });
+        // (function () {
+        //     'use strict'
+
+        //     var forms = document.querySelectorAll('.needs-validation')
+
+        //     Array.prototype.slice.call(forms)
+        //         .forEach(function (form) {
+        //             form.addEventListener('submit', function (event) {
+        //                 if (!form.checkValidity()) {
+        //                     event.preventDefault()
+        //                     event.stopPropagation()
+        //                 }
+
+        //                 form.classList.add('was-validated')
+        //             }, false)
+        //         })
+        // })()
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
