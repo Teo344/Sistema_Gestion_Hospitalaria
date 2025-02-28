@@ -1,6 +1,8 @@
-﻿using CapaEntidades;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using CapaEntidades;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+
 
 namespace CapaDatos
 {
@@ -15,77 +17,65 @@ namespace CapaDatos
 
         public List<PacienteCLS> ObtenerPacientes()
         {
-            return _context.Pacientes
-                .Select(p => new PacienteCLS
-                {
-                    Id = p.Id,
-                    Nombre = p.Nombre,
-                    Apellido = p.Apellido,
-                    FechaNacimiento = p.FechaNacimiento,
-                    Telefono = p.Telefono,
-                    Email = p.Email,
-                    Direccion = p.Direccion
-                }).ToList();
+            List<PacienteCLS> lista = new List<PacienteCLS>();
+            lista = _context.Pacientes
+                .FromSqlRaw("EXEC uspObtenerPacientes")
+                .ToList();
+            return lista;
         }
 
-        public PacienteCLS ObtenerPorId(int id)
+        public List<PacienteCLS> FiltrarPaciente(PacienteCLS objPaciente)
         {
-            var paciente = _context.Pacientes.Find(id);
-            if (paciente != null)
+            List<PacienteCLS> lista = new List<PacienteCLS>();
+            lista = _context.Pacientes
+            .FromSqlRaw("EXEC uspFiltrarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6",
+                objPaciente.Nombre == null ? "" : objPaciente.Nombre,
+                objPaciente.Apellido == null ? "" : objPaciente.Apellido,
+                objPaciente.Email == null ? "" : objPaciente.Email,
+                objPaciente.Telefono == null ? "" : objPaciente.Telefono,
+                objPaciente.FechaNacimiento == default ? (object)DBNull.Value : objPaciente.FechaNacimiento,
+                objPaciente.Direccion == null ? "" : objPaciente.Direccion,
+                objPaciente.Identificacion == null ? "" : objPaciente.Identificacion
+            )
+            .ToList();
+
+            return lista;
+        }
+
+        public int AgregarPaciente(PacienteCLS paciente)
+        {
+            try
             {
-                return new PacienteCLS
-                {
-                    Id = paciente.Id,
-                    Nombre = paciente.Nombre,
-                    Apellido = paciente.Apellido,
-                    FechaNacimiento = paciente.FechaNacimiento,
-                    Telefono = paciente.Telefono,
-                    Email = paciente.Email,
-                    Direccion = paciente.Direccion
-                };
+                return _context.Database.ExecuteSqlRaw("EXEC uspInsertarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6",
+                paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
+                paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
+
             }
-            return null;
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
 
         public PacienteCLS RecuperarPaciente(int id)
         {
-            var nuevoPaciente = new PacienteCLS
-            {
-                Nombre = paciente.Nombre,
-                Apellido = paciente.Apellido,
-                FechaNacimiento = paciente.FechaNacimiento,
-                Telefono = paciente.Telefono,
-                Email = paciente.Email,
-                Direccion = paciente.Direccion
-            };
-            _context.Pacientes.Add(nuevoPaciente);
-            _context.SaveChanges();
+            return _context.Pacientes
+                .FromSqlRaw("EXEC uspRecuperarPaciente @p0", id)
+                .AsEnumerable()
+                .FirstOrDefault(); // Para obtener un solo objeto en lugar de una lista
         }
 
         public void ActualizarPaciente(PacienteCLS paciente)
         {
-            var pacienteExistente = _context.Pacientes.Find(paciente.Id);
-            if (pacienteExistente != null)
-            {
-                pacienteExistente.Nombre = paciente.Nombre;
-                pacienteExistente.Apellido = paciente.Apellido;
-                pacienteExistente.FechaNacimiento = paciente.FechaNacimiento;
-                pacienteExistente.Telefono = paciente.Telefono;
-                pacienteExistente.Email = paciente.Email;
-                pacienteExistente.Direccion = paciente.Direccion;
-                _context.SaveChanges();
-            }
+            _context.Database.ExecuteSqlRaw("EXEC uspActualizarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
+                paciente.Id, paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
+                paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
         }
 
         public void EliminarPaciente(int id)
         {
-            var paciente = _context.Pacientes.Find(id);
-            if (paciente != null)
-            {
-                _context.Pacientes.Remove(paciente);
-                _context.SaveChanges();
-            }
+            _context.Database.ExecuteSqlRaw("EXEC uspEliminarPaciente @p0", id);
         }
     }
 }
