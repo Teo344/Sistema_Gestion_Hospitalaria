@@ -11,7 +11,7 @@ async function ObtenerPacientes() {
         propiedades: ["id", "identificacion", "nombre", "apellido", "fechaNacimiento", "telefono", "email", "direccion"],
         divContenedorTabla: "divContenedorTabla",
         editar: true,
-        eliminar: true, 
+        eliminar: true,
         propiedadId: "id"
     };
     pintar(objPacientes);

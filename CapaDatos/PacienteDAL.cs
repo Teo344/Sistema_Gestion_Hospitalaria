@@ -47,7 +47,8 @@ namespace CapaDatos
             return null;
         }
 
-        public void AgregarPaciente(PacienteCLS paciente)
+
+        public PacienteCLS RecuperarPaciente(int id)
         {
             var nuevoPaciente = new PacienteCLS
             {
