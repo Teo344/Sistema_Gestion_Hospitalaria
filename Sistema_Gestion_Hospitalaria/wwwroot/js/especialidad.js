@@ -119,5 +119,3 @@ function Eliminar(id) {
     });
 }
 
-
-        function fdsfd(objEspecialidades){ }
