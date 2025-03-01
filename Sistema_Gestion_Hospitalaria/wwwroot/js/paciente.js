@@ -35,7 +35,7 @@ function agregarPaciente() {
             let response = parseInt(data);
 
             if (response > 0) {
-                mostrarMensaje("Éxito", "El paciente se ha agregado correctamente", "success");
+                mostrarExito("Éxito", "El paciente se ha agregado correctamente");
                 ObtenerPacientes();
                 limpiarDatos("formAgregarPaciente");
                 cerrarModal("modalAgregarPaciente");
@@ -98,7 +98,7 @@ function editarPaciente() {
             let response = parseInt(data);
 
             if (response > 0) {
-                mostrarExito("Éxito", "El paciente se ha actualizado correctamente");
+                mostrarExito("Éxito", `El paciente ${document.getElementById("editarNombre").value}  se ha actualizado correctamente`);
                 ObtenerPacientes();
                 limpiarDatos("formEditarPaciente");
                 cerrarModal("modalEditar");
@@ -129,7 +129,16 @@ function editarPaciente() {
 }
 
 function Eliminar(id) {
-    fetchGet("Paciente/EliminarPaciente", "text", frm, function (data) {
-        ObtenerPacientes();
+    fetchGet(`Paciente/RecuperarPaciente?id=${id}`, "json", function (data) {
+        Confirmacion(undefined, "¿Está seguro de eliminar al paciente?", function () {
+            fetchGet(`Paciente/EliminarPaciente?id=${id}`, "text", function (response) {
+                if (parseInt(response) > 0) {
+                    ObtenerPacientes();
+                    mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido elminado`  );
+                } else {
+                    mostrarError("Error", "Ha ocurrido un error al eliminar el paciente");
+                }
+            });
+        });
     });
 }

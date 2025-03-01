@@ -29,27 +29,34 @@ function cerrarModal(modalId) {
     if (modalElement) {
         let modalInstance = bootstrap.Modal.getInstance(modalElement);
         if (modalInstance) {
-            modalInstance.hide(); // Cierra el modal
+            modalInstance.hide();
         } else {
-            // Si no existe una instancia, crear una nueva y cerrarla
             new bootstrap.Modal(modalElement).hide();
         }
 
-        // Eliminar el backdrop manualmente
-        eliminarBackdrop();
-
-        // Habilitar el desplazamiento del cuerpo
-        document.body.classList.remove("modal-open");
+        // Espera un poco para asegurarte de que Bootstrap eliminó el modal antes de modificar el estilo
+        setTimeout(() => {
+            eliminarBackdrop();
+            document.body.classList.remove("modal-open");
+            document.body.style.overflow = "auto";  // Habilitar el scroll
+            document.body.style.height = "auto";    // Evitar restricciones de altura
+            document.documentElement.style.overflow = "auto"; // Restaurar en <html> también
+            document.documentElement.style.height = "auto";
+            document.body.style.paddingRight = ""; // Eliminar posibles márgenes agregados por Bootstrap
+        }, 300);
     } else {
         console.error(`No se encontró el modal con ID: ${modalId}`);
     }
 }
+
+
+
+
 function eliminarBackdrop() {
-    let backdrops = document.getElementsByClassName("modal-backdrop");
-    for (let backdrop of backdrops) {
-        backdrop.remove(); // Elimina el backdrop
-    }
+    let backdrops = document.querySelectorAll(".modal-backdrop");
+    backdrops.forEach(backdrop => backdrop.remove());
 }
+
 
 function limpiarDatos(idFormulario) {
     let elementosName = document.querySelectorAll(`#${idFormulario} [name]`);
@@ -127,18 +134,20 @@ function pintar(objConfiguracion) {
     fetchGet(objConfiguracion.url, "json", function (res) {
         let contenido = "";
 
-        contenido = "<div id='divContenedorTabla'>"
+        contenido = "<div id='divContenedor'>"
         contenido += generarTabla(res);
         contenido += "</div>"
-        document.getElementById("divTable").innerHTML = contenido;
-    })
+        document.getElementById(objConfiguracionGlobal.divContenedorTabla).innerHTML = contenido;
+
+        new DataTable('#myTable');
+    });
 }
 function generarTabla(res) {
     let contenido = "";
     let cabeceras = objConfiguracionGlobal.cabeceras;
     let propiedades = objConfiguracionGlobal.propiedades;
     contenido += "<div class='table-responsive'>";
-    contenido += "<table class='table table-striped table-bordered table-hover table-sm'>";
+    contenido += "<table id='myTable' class='table table-striped table-bordered table-hover table-sm'>";
     contenido += "<thead class='table-dark'>";
     contenido += "<tr>";
 
