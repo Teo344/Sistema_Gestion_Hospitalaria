@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<PacienteDAL>();  // Registrar PacienteDAL
 builder.Services.AddScoped<PacienteBL>();   // Registrar PacienteBL
+builder.Services.AddScoped<EspecialidadDAL>();  // Registrar PacienteDAL
+builder.Services.AddScoped<EspecialidadBL>();
 
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
