@@ -68,9 +68,16 @@ namespace CapaDatos
 
         public void ActualizarPaciente(PacienteCLS paciente)
         {
-            _context.Database.ExecuteSqlRaw("EXEC uspActualizarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
-                paciente.Id, paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
-                paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
+            try
+            {
+                _context.Database.ExecuteSqlRaw("EXEC uspActualizarPaciente @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
+                    paciente.Id, paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento,
+                    paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
+            }
+            catch (Exception ex)
+            {
+                throw; 
+            }
         }
 
         public void EliminarPaciente(int id)

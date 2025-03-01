@@ -192,4 +192,51 @@ function generarTabla(res) {
     return contenido;
 }
 
+function Confirmacion(titulo = "Confirmacion", texto, callback) {
+    return Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, estoy seguro"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
+}
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
+
+function mostrarExito(titulo, mensaje) {
+    toastr.success(mensaje, titulo);
+}
+
+function mostrarError(titulo, mensaje) {
+    toastr.error(mensaje, titulo);
+}
+
+function mostrarAdvertencia(titulo, mensaje) {
+    toastr.warning(mensaje, titulo);
+}
+
+function mostrarInfo(titulo, mensaje) {
+    toastr.info(mensaje, titulo);
+}
 

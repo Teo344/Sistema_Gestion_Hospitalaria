@@ -42,8 +42,7 @@ namespace CapaPresentacion.Controllers
 
         public int ActualizarPaciente(PacienteCLS paciente)
         {
-            _pacienteBL.ActualizarPaciente(paciente);
-            return 1; // Retorna 1 si la actualización fue exitosa
+            return _pacienteBL.ActualizarPaciente(paciente);
         }
 
         public int EliminarPaciente(int id)

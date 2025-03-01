@@ -30,12 +30,37 @@ function agregarPaciente() {
     let form = document.getElementById("formAgregarPaciente");
     let frm = new FormData(form);
 
-    fetchPost("Paciente/AgregarPaciente", "text", frm, function (data) {
-        ObtenerPacientes();
-        limpiarDatos("formAgregarPaciente");
+    Confirmacion(undefined, "¿Está seguro de guardar el nuevo paciente?", function () {
+        fetchPost("Paciente/AgregarPaciente", "text", frm, function (data) {
+            let response = parseInt(data);
 
-        cerrarModal();
-
+            if (response > 0) {
+                mostrarMensaje("Éxito", "El paciente se ha agregado correctamente", "success");
+                ObtenerPacientes();
+                limpiarDatos("formAgregarPaciente");
+                cerrarModal("modalAgregarPaciente");
+            } else {
+                switch (response) {
+                    case -1:
+                        mostrarError("Error", "Por favor complete todos los campos requeridos");
+                        break;
+                    case -2:
+                        mostrarError("Error", "El número de cédula ingresado no es válido");
+                        break;
+                    case -3:
+                        mostrarError("Error", "El correo electrónico ingresado no es válido");
+                        break;
+                    case -4:
+                        mostrarError("Error", "El número de teléfono ingresado no es válido");
+                        break;
+                    case -5:
+                        mostrarError("Error", "La fecha de nacimiento ingresada no es válido");
+                        break;
+                    default:
+                        mostrarError("Error", "Ha ocurrido un error al agregar el paciente");
+                }
+            }
+        });
     });
 }
 
@@ -63,14 +88,43 @@ function Editar(id) {
         }
     });
 }
+
 function editarPaciente() {
     let form = document.getElementById("formEditarPaciente");
     let frm = new FormData(form);
 
-    fetchPost("Paciente/ActualizarPaciente", "text", frm, function (data) {
-        ObtenerPacientes();
-        limpiarDatos("formEditarPaciente");
-        cerrarModal("modalEditar");
+    Confirmacion(undefined, "¿Está seguro de realizar los cambios?", function () {
+        fetchPost("Paciente/ActualizarPaciente", "text", frm, function (data) {
+            let response = parseInt(data);
+
+            if (response > 0) {
+                mostrarExito("Éxito", "El paciente se ha actualizado correctamente");
+                ObtenerPacientes();
+                limpiarDatos("formEditarPaciente");
+                cerrarModal("modalEditar");
+            } else {
+                // Error
+                switch (response) {
+                    case -1:
+                        mostrarError("Error", "Por favor complete todos los campos requeridos");
+                        break;
+                    case -2:
+                        mostrarError("Error", "El número de cédula ingresado no es válido");
+                        break;
+                    case -3:
+                        mostrarError("Error", "El correo electrónico ingresado no es válido");
+                        break;
+                    case -4:
+                        mostrarError("Error", "El número de teléfono ingresado no es válido");
+                        break;
+                    case -5:
+                        mostrarError("Error", "La fecha de nacimiento ingresada no es válido");
+                        break;
+                    default:
+                        mostrarError("Error", "Ha ocurrido un error al actualizar el paciente");
+                }
+            }
+        });
     });
 }
 
