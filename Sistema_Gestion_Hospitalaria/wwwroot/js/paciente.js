@@ -35,7 +35,7 @@ function agregarPaciente() {
             let response = parseInt(data);
 
             if (response > 0) {
-                mostrarMensaje("Éxito", "El paciente se ha agregado correctamente", "success");
+                mostrarExito("Éxito", "El paciente se ha agregado correctamente", "success");
                 ObtenerPacientes();
                 limpiarDatos("formAgregarPaciente");
                 cerrarModal("modalAgregarPaciente");
@@ -128,17 +128,11 @@ function editarPaciente() {
     });
 }
 
-function Eliminar(id) {
-    fetchGet(`Paciente/RecuperarPaciente?id=${id}`, "json", function (data) {
-        Confirmacion(undefined, "¿Está seguro de eliminar al paciente?", function () {
-            fetchGet(`Paciente/EliminarPaciente?id=${id}`, "text", function (response) {
-                if (parseInt(response) > 0) {
-                    ObtenerPacientes();
-                    mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido elminado`);
-                } else {
-                    mostrarError("Error", "Ha ocurrido un error al eliminar el paciente");
-                }
-            });
+function Eliminar(obj) {
+    Confirmacion(undefined, "¿Desea eliminar el paciente " + obj.nombre + " " + obj.apellido + "?", function () {
+        fetchGet("Paciente/EliminarPaciente/?id=" + obj.id, "text", function (res) {
+            mostrarExito("Éxito", "El paciente se ha eliminado correctamente");
+            ObtenerPacientes();
         });
     });
 }

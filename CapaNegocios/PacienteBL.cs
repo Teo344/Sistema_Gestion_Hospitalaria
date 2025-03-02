@@ -45,6 +45,11 @@ namespace CapaNegocios
                 return -4; 
             }
 
+            if (!validarFechaNacimiento(paciente.FechaNacimiento))
+            {
+                return -5;
+            }
+
             return _pacienteDAL.AgregarPaciente(paciente);
         }
 

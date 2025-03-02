@@ -106,7 +106,7 @@ async function fetchPost(url, tipoRespuesta, frm, callback) {
         callback(res);
 
     } catch (e) {
-        alert("Ocurrió un error en post");
+        alert("Ocurrió un error en post" + e);
     }
 }
 
