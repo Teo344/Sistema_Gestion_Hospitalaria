@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="30" height="30">
+        <path d="M48 0C21.5 0 0 21.5 0 48L0 256l144 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L0 288l0 64 144 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L0 384l0 80c0 26.5 21.5 48 48 48l217.9 0c-6.3-10.2-9.9-22.2-9.9-35.1c0-46.9 25.8-87.8 64-109.2l0-95.9L320 48c0-26.5-21.5-48-48-48L48 0zM152 64l16 0c8.8 0 16 7.2 16 16l0 24 24 0c8.8 0 16 7.2 16 16l0 16c0 8.8-7.2 16-16 16l-24 0 0 24c0 8.8-7.2 16-16 16l-16 0c-8.8 0-16-7.2-16-16l0-24-24 0c-8.8 0-16-7.2-16-16l0-16c0-8.8 7.2-16 16-16l24 0 0-24c0-8.8 7.2-16 16-16zM512 272a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM288 477.1c0 19.3 15.6 34.9 34.9 34.9l218.2 0c19.3 0 34.9-15.6 34.9-34.9c0-51.4-41.7-93.1-93.1-93.1l-101.8 0c-51.4 0-93.1 41.7-93.1 93.1z" />
+    </svg>
+    Gestion de Medicos
+</h1>
+
+<button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarMedico">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+    </svg> Agregar Nuevo
+</button>
+
+<fieldset class="p-3 my-3 border border-primary rounded">
+    <legend class="float-none w-auto text-primary fw-bold">Buscar Medicos</legend>
+    <form id="formBusquedaMedico" method="post" class="row g-3">
+        <div class="col-md-4">
+            <label for="identificacion" class="form-label">Identificacion</label>
+            <input type="text" class="form-control" name="identificacion" placeholder="Ingrese el numero de cedula">
+        </div>
+        <div class="col-md-4">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre">
+        </div>
+        <div class="col-md-4">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido">
+        </div>
+        <!--
+        <div class="col-md-4">
+            <label for="fechanacimiento" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" name="fechanacimiento">
+        </div>
+        <div class="col-md-4">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" name="email" placeholder="Ingrese el correo">
+        </div>
+        <div class="col-md-4">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono">
+        </div>
+        <div class="col-md-8">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección">
+        </div>
+        -->
+        <div class="col-12 d-flex gap-2">
+            <button type="button" class="btn btn-primary" onclick="buscarMedico()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg> Buscar
+            </button>
+            <button type="button" class="btn btn-warning" onclick="limpiarMedico()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+                    <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
+                </svg> Limpiar
+            </button>
+        </div>
+    </form>
+</fieldset>
+
+<div class="modal fade" id="modalAgregarMedico" tabindex="-1" aria-labelledby="modalAgregarMedicoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarMedicoLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                    </svg> Agregar Nuevo Medico
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarMedico" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="identificacion" class="form-label">Identificación</label>
+                        <input type="text" class="form-control" name="identificacion" placeholder="Ingrese el número de cédula" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="selectEspecialidad" class="form-label">Eliga la Especialidad</label>
+                        <select class="form-select" name="idEspecialidad" id="selectEspecialidad" required>
+                            <option value="">Seleccione un laboratorio</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" placeholder="Ingrese el correo" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formAgregarPaciente')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarPaciente()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarPacienteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarPacienteLabel">
+                    Editar Paciente
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarPaciente" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="id" class="form-label">Id Paciente</label>
+                        <input type="text" class="form-control" name="id" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="identificacion" class="form-label">Identificación</label>
+                        <input type="text" class="form-control" name="identificacion" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" id="editarNombre" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" name="fechanacimiento" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" name="telefono" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formEditarPaciente')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="editarPaciente()">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="divTable" class="mt-4">
+    <div id="divContenedorTabla"></div>
+</div>
+
+<script src="~/js/generico.js"></script>
+<script src="~/js/medico.jss"></script>

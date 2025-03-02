@@ -129,13 +129,12 @@ function editarPaciente() {
 }
 
 function Eliminar(id) {
-    fetchGet("Paciente/EliminarPaciente", "text", frm, function (data) {
-                    ObtenerPacientes();
-                    mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido elminado`  );
-                } else {
-                    mostrarError("Error", "Ha ocurrido un error al eliminar el paciente");
-                }
-            });
-        });
+    fetchGet(`Paciente/EliminarPaciente?id=${id}`, "text", null, function (data) {
+        if (data && data.nombre) {  // Verifica que `data` no sea null y tenga la propiedad `nombre`
+            ObtenerPacientes();
+            mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido eliminado`);
+        } else {
+            mostrarError("Error", "Ha ocurrido un error al eliminar el paciente");
+        }
     });
 }

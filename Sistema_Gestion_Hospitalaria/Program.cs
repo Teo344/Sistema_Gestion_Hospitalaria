@@ -9,6 +9,8 @@ builder.Services.AddScoped<PacienteDAL>();  // Registrar PacienteDAL
 builder.Services.AddScoped<PacienteBL>();   // Registrar PacienteBL
 builder.Services.AddScoped<EspecialidadDAL>();  // Registrar PacienteDAL
 builder.Services.AddScoped<EspecialidadBL>();
+builder.Services.AddScoped<MedicoDAL>();
+builder.Services.AddScoped<MedicoBL>();
 
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));

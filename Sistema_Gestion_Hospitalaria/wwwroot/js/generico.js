@@ -130,9 +130,11 @@ function pintar(objConfiguracion) {
     if (objConfiguracionGlobal.propiedadId == undefined) {
         objConfiguracionGlobal.eliminar = "";
     }
+        
 
     fetchGet(objConfiguracion.url, "json", function (res) {
         let contenido = "";
+
 
         contenido = "<div id='divContenedor'>"
         contenido += generarTabla(res);
