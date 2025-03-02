@@ -51,8 +51,9 @@ namespace CapaDatos
                 paciente.Telefono, paciente.Email, paciente.Direccion, paciente.Identificacion);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error al agregar paciente: {ex.Message}");
                 return 0;
             }
         }
@@ -76,13 +77,13 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                throw; 
+                throw;
             }
         }
 
-        public void EliminarPaciente(int id)
+        public void EliminarPaciente(PacienteCLS paciente)
         {
-            _context.Database.ExecuteSqlRaw("EXEC uspEliminarPaciente @p0", id);
+            _context.Database.ExecuteSqlRaw("EXEC uspEliminarPaciente @p0", paciente.Id);
         }
     }
 }

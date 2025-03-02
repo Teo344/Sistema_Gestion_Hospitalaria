@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">
+        <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z" />
+        <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z" />
+        <path d="M9.979 5.356a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.926-.08L4.69 10H4.5a.5.5 0 0 0 0 1H5a.5.5 0 0 0 .447-.276l.936-1.873 1.138 3.793a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h.5a.5.5 0 0 0 0-1h-.128z" />
+    </svg> 
+    Gestión de Tratamientos
+</h1>
+
+<button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarTratamiento">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+    </svg> Agregar Nuevo
+</button>
+
+<fieldset class="p-3 my-3 border border-primary rounded">
+    <legend class="float-none w-auto text-primary fw-bold">Buscar Tratamientos</legend>
+    <form id="formBusquedaTratamiento" method="post" class="row g-3">
+        <div class="col-md-4">
+            <label for="identificacionPaciente" class="form-label">Identificación del Paciente</label>
+            <input type="text" class="form-control" name="identificacionPaciente" placeholder="Ingrese la identificación del paciente">
+        </div>
+        <div class="col-md-4">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" placeholder="Ingrese la descripción">
+        </div>
+        <div class="col-md-4">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" name="fecha">
+        </div>
+        <div class="col-12 d-flex gap-2">
+            <button type="button" class="btn btn-primary" onclick="buscarTratamiento()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg> Buscar
+            </button>
+            <button type="button" class="btn btn-warning" onclick="limpiarTratamiento()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+                    <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
+                </svg> Limpiar
+            </button>
+        </div>
+    </form>
+</fieldset>
+
+<!-- Modal para agregar tratamiento -->
+<div class="modal fade" id="modalAgregarTratamiento" tabindex="-1" aria-labelledby="modalAgregarTratamientoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarTratamientoLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                    </svg> Agregar Nuevo Tratamiento
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarTratamiento" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="identificacionPaciente" class="form-label">Identificación del Paciente</label>
+                        <input type="text" class="form-control" name="identificacionPaciente" placeholder="Ingrese la identificación del paciente" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" placeholder="Ingrese la descripción" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" name="fecha" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="costo" class="form-label">Costo</label>
+                        <input type="number" class="form-control" name="costo" placeholder="Ingrese el costo" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formAgregarTratamiento')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarTratamiento()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar tratamiento -->
+<div class="modal fade" id="modalEditarTratamiento" tabindex="-1" aria-labelledby="modalEditarTratamientoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarTratamientoLabel">
+                    Editar Tratamiento
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarTratamiento" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="id" class="form-label">Id Tratamiento</label>
+                        <input type="text" class="form-control" name="id" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="identificacionPaciente" class="form-label">Identificación del Paciente</label>
+                        <input type="text" class="form-control" name="identificacionPaciente" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" name="fecha" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="costo" class="form-label">Costo</label>
+                        <input type="number" class="form-control" name="costo" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formEditarTratamiento')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="editarTratamiento()">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divTable" class="mt-4">
+    <div id="divContenedorTabla"></div>
+</div>
+
+<script src="~/js/generico.js"></script>
+<script src="~/js/tratamiento.js"></script>

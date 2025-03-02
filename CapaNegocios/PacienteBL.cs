@@ -85,17 +85,17 @@ namespace CapaNegocios
             }
 
             _pacienteDAL.ActualizarPaciente(paciente);
-            return 1; // Retorna 1 si la actualización fue exitosa
+            return 1; 
         }
-        public int EliminarPaciente(int id)
+        public int EliminarPaciente(PacienteCLS paciente)
         {
-            if (id <= 0)
+            if (paciente == null || paciente.Id <= 0)
             {
-                return 0;
+                return 0; // Retorna 0 si el paciente es nulo o tiene un id no válido.
             }
 
-            _pacienteDAL.EliminarPaciente(id);
-            return 1;
+            _pacienteDAL.EliminarPaciente(paciente);
+            return 1; // Retorna 1 si la eliminación fue exitosa.
         }
 
         public bool validarCampos(PacienteCLS paciente)
