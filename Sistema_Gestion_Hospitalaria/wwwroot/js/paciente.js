@@ -129,10 +129,7 @@ function editarPaciente() {
 }
 
 function Eliminar(id) {
-    fetchGet(`Paciente/RecuperarPaciente?id=${id}`, "json", function (data) {
-        Confirmacion(undefined, "¿Está seguro de eliminar al paciente?", function () {
-            fetchGet(`Paciente/EliminarPaciente?id=${id}`, "text", function (response) {
-                if (parseInt(response) > 0) {
+    fetchGet("Paciente/EliminarPaciente", "text", frm, function (data) {
                     ObtenerPacientes();
                     mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido elminado`  );
                 } else {
