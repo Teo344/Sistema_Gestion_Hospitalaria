@@ -16,25 +16,19 @@ namespace CapaDatos
 
         public List<MedicoCLS> ObtenerMedicos()
         {
-            List<MedicoCLS> lista = _context.Medicos
-                .Include(m => m.Especialidad)
-                .Select(medico => new MedicoCLS
-                {
-                    Id = medico.Id,
-                    Nombre = medico.Nombre,
-                    Apellido = medico.Apellido,
-                    EspecialidadId = medico.EspecialidadId,
-                    Telefono = medico.Telefono,
-                    Email = medico.Email,
-                    Especialidad = new EspecialidadCLS
-                    {
-                        Id = medico.Especialidad.Id,
-                        Nombre = medico.Especialidad.Nombre
-                    }
-                }).ToList();
-
-            return lista;
+            try
+            {
+                return _context.Medicos
+                    .FromSqlRaw("EXEC uspObtenerMedicos") // Llamada al procedimiento almacenado
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
+
 
         public MedicoCLS ObtenerPorId(int id)
         {
@@ -92,15 +86,9 @@ namespace CapaDatos
             }
         }
 
-        public void Eliminar(int id)
+        public void EliminarMedico(MedicoCLS medico)
         {
-            var medico = _context.Medicos.Find(id);
-
-            if (medico != null)
-            {
-                _context.Medicos.Remove(medico);
-                _context.SaveChanges();
-            }
+            _context.Database.ExecuteSqlRaw("EXEC uspEliminarMedico @p0", medico.Id);
         }
     }
 }

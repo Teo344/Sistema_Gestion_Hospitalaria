@@ -24,5 +24,11 @@ namespace CapaPresentacion.Controllers
             return _medicoBL.ObtenerMedicos();
         }
 
+        public int EliminarMedico(MedicoCLS medico)
+        {
+            return _medicoBL.EliminarMedico(medico);
+        }
+
+
     }
 }

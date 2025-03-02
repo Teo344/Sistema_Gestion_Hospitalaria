@@ -39,10 +39,27 @@ namespace CapaNegocios
             _medicoDAL.Actualizar(medico);
         }
 
-        public void EliminarMedico(int id)
+        public int EliminarMedico(MedicoCLS medico)
         {
-            // Lógica adicional si es necesario, como verificar dependencias
-            _medicoDAL.Eliminar(id);
+            if (medico.Id <= 0)
+            {
+                return 0;
+            }
+
+            try
+            {
+                _medicoDAL.EliminarMedico(medico);
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el medico: " + ex.Message);
+            }
         }
+
+
+
+
+
     }
 }

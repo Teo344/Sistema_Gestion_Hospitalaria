@@ -104,17 +104,11 @@ function editarEspecialidad() {
     });
 }
 
-function Eliminar(id) {
-    fetchGet(`Especialidad/RecuperarEspecialidad?id=${id}`, "json", function (data) {
-        Confirmacion(undefined, "¿Está seguro de eliminar la especialidad?", function () {
-            fetchGet(`Especialidad/EliminarEspecialidad?id=${id}`, "text", function (response) {
-                if (parseInt(response) > 0) {
-                    ObtenerEspecialidades();
-                    mostrarExito("Éxito", `La Especialidad: ${data.nombre} ha sido elminado`);
-                } else {
-                    mostrarError("Error", "Ha ocurrido un error la Especialidad");
-                }
-            });
+function Eliminar(obj) {
+    Confirmacion(undefined, "¿Desea eliminar la Especialdiad " + obj.nombre + "?", function () {
+        fetchGet("Especialidad/EliminarEspecialidad/?id=" + obj.id, "text", function (res) {
+            mostrarExito("Éxito", "La Especialdiad se ha eliminado correctamente");
+            ObtenerEspecialidades();
         });
     });
 }
