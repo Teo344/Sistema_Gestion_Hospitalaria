@@ -128,11 +128,17 @@ function editarPaciente() {
     });
 }
 
-function Eliminar(objPaciente) {
-    Confirmacion(undefined, "¿Desea eliminar al paciente " + objPaciente.nombre + " " + objPaciente.apellido + "?", function () {
-        fetchGet("Paciente/EliminarPaciente/?id=" + objPaciente.id, "text", function (res) {
-            mostrarExito("Éxito", "El paciente se ha eliminado correctamente");
-            ObtenerPacientes();    
+function Eliminar(id) {
+    fetchGet(`Paciente/RecuperarPaciente?id=${id}`, "json", function (data) {
+        Confirmacion(undefined, "¿Está seguro de eliminar al paciente?", function () {
+            fetchGet(`Paciente/EliminarPaciente?id=${id}`, "text", function (response) {
+                if (parseInt(response) > 0) {
+                    ObtenerPacientes();
+                    mostrarExito("Éxito", `El paciente: ${data.nombre} ha sido elminado`);
+                } else {
+                    mostrarError("Error", "Ha ocurrido un error al eliminar el paciente");
+                }
+            });
         });
     });
 }
