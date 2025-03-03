@@ -63,8 +63,21 @@ namespace CapaDatos
         {
             try
             {
-                _context.Database.ExecuteSqlRaw("EXEC uspActualizarAdministrador @p0, @p1, @p2, @p3, @p4",
-                    administrador.Id, administrador.Nombre, administrador.Apellido, administrador.Clave, administrador.Email);
+                _context.Database.ExecuteSqlRaw("EXEC uspActualizarAdministrador @p0, @p1, @p2, @p3",
+                    administrador.Id, administrador.Nombre, administrador.Apellido, administrador.Email);
+            }
+            catch (Exception ex)
+            {
+                throw; // Relanzar la excepción para manejarla en la capa superior
+            }
+        }
+
+        public void ActualizarClaveAdministrador(int id, string nuevaClave)
+        {
+            try
+            {
+                _context.Database.ExecuteSqlRaw("EXEC uspActualizarClaveAdministrador @p0, @p1",
+                    id, nuevaClave);
             }
             catch (Exception ex)
             {

@@ -96,6 +96,7 @@ GO
 
 USE [HospitalDB]
 GO
+/****** Object:  StoredProcedure [dbo].[uspFiltrarCitas]    Script Date: 3/3/2025 0:05:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,11 +111,11 @@ AS
 BEGIN
     SELECT 
         C.Id,
-		P.Id AS PacienteId,
+        P.Id AS PacienteId,
         P.Identificacion AS PacienteIdentificacion,
         P.Nombre AS PacienteNombre,
         P.Apellido AS PacienteApellido,
-		M.Id AS MedicoId,
+        M.Id AS MedicoId,
         M.Identificacion AS MedicoIdentificacion,
         M.Nombre AS MedicoNombre,
         M.Apellido AS MedicoApellido,

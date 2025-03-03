@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CapaDatos;
 using CapaEntidades;
+using BCrypt.Net; 
 
 namespace CapaNegocios
 {
@@ -29,18 +30,21 @@ namespace CapaNegocios
         {
             if (!ValidarCampos(administrador))
             {
-                return -1; 
+                return -1; // Campos obligatorios no válidos
             }
 
             if (!ValidarEmail(administrador.Email))
             {
-                return -2; 
+                return -2; // Email no válido
             }
 
             if (!ValidarClave(administrador.Clave))
             {
-                return -3;
+                return -3; // Contraseña no válida
             }
+
+            // Hashear la contraseña antes de guardarla
+            administrador.Clave = HashClave(administrador.Clave);
 
             return _administradorDAL.AgregarAdministrador(administrador);
         }
@@ -54,37 +58,52 @@ namespace CapaNegocios
         {
             if (administrador.Id <= 0)
             {
-                return 0; 
+                return 0; // ID no válido
             }
 
             if (!ValidarCampos(administrador))
             {
-                return -1; 
+                return -1; // Campos obligatorios no válidos
             }
 
             if (!ValidarEmail(administrador.Email))
             {
-                return -2; 
+                return -2; // Email no válido
             }
 
-            if (!ValidarClave(administrador.Clave))
-            {
-                return -3; 
-            }
-
+            // No se valida ni actualiza la contraseña aquí
             _administradorDAL.ActualizarAdministrador(administrador);
-            return 1; 
+            return 1; // Actualización exitosa
+        }
+
+        public int ActualizarClaveAdministrador(int id, string nuevaClave)
+        {
+            if (id <= 0)
+            {
+                return 0; // ID no válido
+            }
+
+            if (!ValidarClave(nuevaClave))
+            {
+                return -3; // Contraseña no válida
+            }
+
+            // Hashear la nueva contraseña antes de guardarla
+            string claveHasheada = HashClave(nuevaClave);
+
+            _administradorDAL.ActualizarClaveAdministrador(id, claveHasheada);
+            return 1; // Actualización de contraseña exitosa
         }
 
         public int EliminarAdministrador(AdministradorCLS administrador)
         {
             if (administrador == null || administrador.Id <= 0)
             {
-                return 0; 
+                return 0; // Administrador no válido
             }
 
             _administradorDAL.EliminarAdministrador(administrador);
-            return 1; 
+            return 1; // Eliminación exitosa
         }
 
         private bool ValidarCampos(AdministradorCLS administrador)
@@ -120,6 +139,17 @@ namespace CapaNegocios
             }
 
             return true;
+        }
+
+        private string HashClave(string clave)
+        {
+            // Hashear la contraseña usando BCrypt
+            return BCrypt.Net.BCrypt.HashPassword(clave);
+        }
+
+        public bool VerificarClave(string claveIngresada, string claveHasheada)
+        {
+            return BCrypt.Net.BCrypt.Verify(claveIngresada, claveHasheada);
         }
 
         public int ContarPacientes()

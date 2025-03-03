@@ -12,7 +12,7 @@ builder.Services.AddScoped<EspecialidadBL>();
 builder.Services.AddScoped<TratamientoDAL>();  
 builder.Services.AddScoped<TratamientoBL>();
 builder.Services.AddScoped<AdministradorDAL>();
-builder.Services.AddScoped<AdministradorBL>();
+builder.Services.AddScoped<AdministradorBL>(); 
 builder.Services.AddScoped<CitaDAL>();
 builder.Services.AddScoped<CitaBL>();
 builder.Services.AddScoped<MedicoDAL>();
@@ -43,7 +43,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Acceso}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
