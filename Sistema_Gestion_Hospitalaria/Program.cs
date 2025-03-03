@@ -11,6 +11,10 @@ builder.Services.AddScoped<EspecialidadDAL>();  // Registrar PacienteDAL
 builder.Services.AddScoped<EspecialidadBL>();
 builder.Services.AddScoped<TratamientoDAL>();  
 builder.Services.AddScoped<TratamientoBL>();
+builder.Services.AddScoped<AdministradorDAL>();
+builder.Services.AddScoped<AdministradorBL>();
+builder.Services.AddScoped<CitaDAL>();
+builder.Services.AddScoped<CitaBL>();
 
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));

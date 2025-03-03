@@ -1,8 +1,61 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Dashboard</h1>
+
+<div class="row mt-3">
+    <div class="col-md-4 py-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Total de Pacientes</h3>
+                <h5 class="card-text">@ViewBag.TotalPacientes</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 py-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Total de Médicos</h3>
+                <h5 class="card-text">@ViewBag.TotalMedicos</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 py-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Total de Especialidades</h3>
+                <h5 class="card-text">@ViewBag.TotalEspecialidades</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 py-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Total de Citas</h3>
+                <h5 class="card-text">@ViewBag.TotalCitas</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class ="row mt-4">
+    <div class="col-md-4 py-3">
+        <div class="card text-dark bg-warning ">
+            <div class="card-body">
+                <h3 class="card-title">Total de Ingreso Mensual</h3>
+                <h5 class="card-text">@ViewBag.TotalIngresoMes</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 py-3">
+        <div class="card text-dark bg-warning ">
+            <div class="card-body">
+                <h3 class="card-title">Total de Ingresos</h3>
+                <h5 class="card-text">@ViewBag.TotalIngreso</h5>
+            </div>
+        </div>
+    </div>
 </div>

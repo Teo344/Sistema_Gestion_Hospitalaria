@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Gestión de Citas";
+}
+
+<h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="30" height="30">
+        <path d="M152 64H296V24C296 10.75 306.7 0 320 0C333.3 0 344 10.75 344 24V64H384C419.3 64 448 92.65 448 128V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V128C0 92.65 28.65 64 64 64H104V24C104 10.75 114.7 0 128 0C141.3 0 152 10.75 152 24V64zM48 248H128V192H48V248zM48 296V360H128V296H48zM176 296V360H272V296H176zM320 296V360H400V296H320zM400 192H320V248H400V192zM400 408H320V464H384C392.8 464 400 456.8 400 448V408zM272 408H176V464H272V408zM128 408H48V448C48 456.8 55.16 464 64 464H128V408zM272 192H176V248H272V192z" />
+    </svg>
+    Gestión de Citas
+</h1>
+
+<button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarCita">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar-plus-fill" viewBox="0 0 16 16">
+        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-8.5-7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5" />
+    </svg> Agregar Nueva Cita
+</button>
+
+<fieldset class="p-3 my-3 border border-primary rounded">
+    <legend class="float-none w-auto text-primary fw-bold">Buscar Citas</legend>
+    <form id="formBusquedaCita" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="pacienteIdentificacion" class="form-label">Cédula de Identificación del Paciente</label>
+            <input type="text" class="form-control" name="pacienteIdentificacion" placeholder="Ingrese la cédula de identificación del paciente"
+                pattern="\d{10}" title="La cédula debe tener exactamente 10 dígitos" required>
+        </div>
+        <div class="col-md-6">
+            <label for="medicoIdentificacion" class="form-label">Cédula de Identificación del Médico</label>
+            <input type="text" class="form-control" name="medicoIdentificacion" placeholder="Ingrese la cédula de identificación del médico"
+                pattern="\d{10}" title="La cédula debe tener exactamente 10 dígitos" required>
+        </div>
+        <div class="col-md-4">
+            <label for="fechaInicio" class="form-label">Fecha Inicio</label>
+            <input type="datetime-local" class="form-control" name="fechaInicio">
+        </div>
+        <div class="col-md-4">
+            <label for="fechaFin" class="form-label">Fecha Fin</label>
+            <input type="datetime-local" class="form-control" name="fechaFin">
+        </div>
+        <div class="col-md-4">
+            <label for="estado" class="form-label">Estado</label>
+            <select class="form-select" name="estado">
+                <option value="">Seleccione un estado</option>
+                <option value="Programado">Programado</option>
+                <option value="Cancelado">Cancelado</option>
+                <option value="Realizado">Realizado</option>
+            </select>
+        </div>
+        <div class="col-12 d-flex gap-2">
+            <button type="button" class="btn btn-primary" onclick="buscarCita()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg> Buscar
+            </button>
+            <button type="button" class="btn btn-warning" onclick="limpiarCita()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+                    <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
+                </svg> Limpiar
+            </button>
+        </div>
+    </form>
+</fieldset>
+
+
+
+<div class="modal fade" id="modalAgregarCita" tabindex="-1" aria-labelledby="modalAgregarCitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarCitaLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-plus-fill" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-8.5-7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5" />
+                    </svg> Agregar Nueva Cita
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formAgregarCita" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="pacienteIdentificacion" class="form-label">Identificación del Paciente</label>
+                        <input type="text" class="form-control" name="pacienteIdentificacion" placeholder="Ingrese la identificación del paciente" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="medicoIdentificacion" class="form-label">Identificación del Médico</label>
+                        <input type="text" class="form-control" name="medicoIdentificacion" placeholder="Ingrese la identificación del médico" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaHora" class="form-label">Fecha y Hora</label>
+                        <input type="datetime-local" class="form-control" name="fechaHora" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" name="estado" required>
+                            <option value="Programada">Programada</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarCita()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditarCita" tabindex="-1" aria-labelledby="modalEditarCitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarCitaLabel">
+                    Editar Cita
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarCita" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="id" class="form-label">ID Cita</label>
+                        <input type="text" class="form-control" name="id" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pacienteIdentificacion" class="form-label">Identificación del Paciente</label>
+                        <input type="text" class="form-control" name="pacienteIdentificacion" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="medicoIdentificacion" class="form-label">Identificación del Médico</label>
+                        <input type="text" class="form-control" name="medicoIdentificacion" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaHora" class="form-label">Fecha y Hora</label>
+                        <input type="datetime-local" class="form-control" name="fechaHora" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" name="estado" required>
+                            <option value="Programada">Programada</option>
+                            <option value="Cancelada">Cancelada</option>
+                            <option value="Completada">Completada</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="editarCita()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divTable" class="mt-4">
+    <div id="divContenedorTabla"></div>
+</div>
+
+<script src="~/js/generico.js"></script>
+<script src="~/js/cita.js"></script>

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using CapaEntidades;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 

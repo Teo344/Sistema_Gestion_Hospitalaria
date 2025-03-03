@@ -121,5 +121,35 @@ namespace CapaNegocios
 
             return true;
         }
+
+        public int ContarPacientes()
+        {
+            return _administradorDAL.ObtenerTotalPacientes();
+        }
+
+        public int ContarMedicos()
+        {
+            return _administradorDAL.ObtenerTotalMedicos();
+        }
+
+        public int ContarEspecialidades()
+        {
+            return _administradorDAL.ObtenerTotalEspecialidades();
+        }
+
+        public int ContarCitas()
+        {
+            return _administradorDAL.ObtenerTotalCitas();
+        }
+
+        public float ObtenerIngresoTotal()
+        {
+            return _administradorDAL.ObtenerIngresoTotal();
+        }
+
+        public float ObtenerIngresoMesActual()
+        {
+            return _administradorDAL.ObtenerIngresoMesActual();
+        }
     }
 }

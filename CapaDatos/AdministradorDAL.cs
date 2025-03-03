@@ -76,5 +76,60 @@ namespace CapaDatos
         {
             _context.Database.ExecuteSqlRaw("EXEC uspEliminarAdministrador @p0", administrador.Id);
         }
+
+        public int ObtenerTotalPacientes()
+        {
+            var resultado = _context.Database.SqlQuery<int>($"EXEC uspObtenerTotalPacientes")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return resultado;
+        }
+
+        public int ObtenerTotalMedicos()
+        {
+            var resultado = _context.Database.SqlQuery<int>($"EXEC uspObtenerTotalMedicos")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return resultado;
+        }
+
+        public int ObtenerTotalEspecialidades()
+        {
+            var resultado = _context.Database.SqlQuery<int>($"EXEC uspObtenerTotalEspecialidades")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return resultado;
+        }
+
+        public int ObtenerTotalCitas()
+        {
+            var resultado = _context.Database.SqlQuery<int>($"EXEC uspObtenerTotalCitas")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return resultado;
+        }
+
+        public float ObtenerIngresoTotal()
+        {
+            var resultado = _context.Database.SqlQuery<decimal>($"EXEC uspCalcularIngresoTotal")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return Convert.ToSingle(resultado);
+        }
+
+        public float ObtenerIngresoMesActual()
+        {
+            var resultado = _context.Database.SqlQuery<decimal>($"EXEC uspCalcularIngresoMesActual")
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return Convert.ToSingle(resultado);
+        }
+
     }
 }

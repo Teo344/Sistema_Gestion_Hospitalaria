@@ -144,6 +144,11 @@ function pintar(objConfiguracion) {
         new DataTable('#myTable');
     });
 }
+function formatearFecha(fecha) {
+    if (!fecha) return ''; 
+    return fecha.replace("T", " 🕒 ");
+}
+
 function generarTabla(res) {
     let contenido = "";
     let cabeceras = objConfiguracionGlobal.cabeceras;
@@ -172,6 +177,9 @@ function generarTabla(res) {
         contenido += "<tr class='align-middle'>";
         for (let j = 0; j < propiedades.length; j++) {
             let propiedadActual = propiedades[j];
+            if (propiedadActual === "fechaHora") {
+                obj[propiedadActual] = formatearFecha(obj[propiedadActual]);
+            }
             contenido += "<td class='text-center align-middle py-3'>" + obj[propiedadActual] + "</td>";
         }
         if (objConfiguracionGlobal.editar == true || objConfiguracionGlobal.eliminar == true) {

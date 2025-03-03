@@ -17,5 +17,7 @@ namespace CapaEntidades
         // Relaciones
         public PacienteCLS Paciente { get; set; }
         public MedicoCLS Medico { get; set; }
+        public string PacienteIdentificacion { get; set; }
+        public string MedicoIdentificacion { get; set; }
     }
 }
