@@ -24,5 +24,31 @@ namespace CapaPresentacion.Controllers
             return _medicoBL.ObtenerMedicos();
         }
 
+        public int AgregarMedico(MedicoCLS medico)
+        {
+            return _medicoBL.AgregarMedico(medico);
+        }
+
+        public MedicoCLS RecuperarMedico(int id)
+        {
+            return _medicoBL.RecuperarMedico(id);
+        }
+
+        public int EliminarMedico(MedicoCLS medico)
+        {
+            return _medicoBL.EliminarMedico(medico);
+        }
+        public List<MedicoCLS> FiltrarMedico(MedicoCLS objMedico)
+        {
+            return _medicoBL.FiltrarMedico(objMedico);
+        }
+
+
+
+        public int ActualizarMedico(MedicoCLS medico)
+        {
+            return _medicoBL.ActualizarMedico(medico);
+        }
+
     }
 }

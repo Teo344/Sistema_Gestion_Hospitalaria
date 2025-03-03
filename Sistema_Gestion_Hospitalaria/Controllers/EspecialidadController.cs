@@ -45,9 +45,9 @@ namespace CapaPresentacion.Controllers
             return _especialidadBL.ActualizarEspecialidad(especialidad);
         }
 
-        public int EliminarEspecialidad(int id)
+        public int EliminarEspecialidad(EspecialidadCLS especialidad)
         {
-            return _especialidadBL.EliminarEspecialidad(id);
+            return _especialidadBL.EliminarEspecialidad(especialidad);
         }
 
 

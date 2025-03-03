@@ -15,6 +15,8 @@ builder.Services.AddScoped<AdministradorDAL>();
 builder.Services.AddScoped<AdministradorBL>();
 builder.Services.AddScoped<CitaDAL>();
 builder.Services.AddScoped<CitaBL>();
+builder.Services.AddScoped<MedicoDAL>();
+builder.Services.AddScoped<MedicoBL>();
 
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));

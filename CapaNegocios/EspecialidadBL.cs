@@ -67,15 +67,22 @@ namespace CapaNegocios
             _especialidadDAL.ActualizarEspecialidad(especialidad);
             return 1; // Retorna 1 si la actualización fue exitosa
         }
-        public int EliminarEspecialidad(int id)
+        public int EliminarEspecialidad(EspecialidadCLS especialidad)
         {
-            if (id <= 0)
+            if (especialidad.Id <= 0)
             {
                 return 0;
             }
 
-            _especialidadDAL.EliminarEspecialidad(id);
-            return 1;
+            try
+            {
+                _especialidadDAL.EliminarEspecialidad(especialidad);
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la especialidad: " + ex.Message);
+            }
         }
 
         public bool validarCampos(EspecialidadCLS especialidad)

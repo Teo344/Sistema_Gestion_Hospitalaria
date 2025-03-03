@@ -31,6 +31,22 @@
             <label for="apellido" class="form-label">Apellido</label>
             <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido">
         </div>
+        <div class="mb-3">
+            <label for="selectEspecialidad" class="form-label">Especialidad</label>
+            <select class="form-select" name="EspecialidadId" id="selectEspecialidadBusqueda">
+                <option value="">Seleccione la especialidad</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="selectEspecialidadActivo" class="form-label">Disponible</label>
+            <select class="form-select" name="Activo" id="selectEspecialidadActivoBusqueda" >
+                <option value="">Seleccione la especialidad</option>
+                <option value="0">No disponible</option>
+				<option value="1">Disponible</option>
+            </select>
+        </div>
+
         <!--
         <div class="col-md-4">
             <label for="fechanacimiento" class="form-label">Fecha de nacimiento</label>
@@ -93,8 +109,8 @@
 
                     <div class="mb-3">
                         <label for="selectEspecialidad" class="form-label">Eliga la Especialidad</label>
-                        <select class="form-select" name="idEspecialidad" id="selectEspecialidad" required>
-                            <option value="">Seleccione un laboratorio</option>
+                        <select class="form-select" name="EspecialidadId" id="selectEspecialidadAgregar" required>
+                            <option value="">Seleccione la Especialidad</option>
                         </select>
                     </div>
 
@@ -106,31 +122,33 @@
                         <label for="email" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" name="email" placeholder="Ingrese el correo" required>
                     </div>
+
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formAgregarPaciente')">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="agregarPaciente()">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formAgregarMedico')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarMedico()">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarPacienteLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarMedicoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditarPacienteLabel">
-                    Editar Paciente
+                <h5 class="modal-title" id="modalEditarMedicoLabel">
+                    Editar Medico
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formEditarPaciente" class="row g-3">
+                <form id="formEditarMedico" class="row g-3">
                     <div class="col-md-6">
-                        <label for="id" class="form-label">Id Paciente</label>
+                        <label for="id" class="form-label">Id Medico</label>
                         <input type="text" class="form-control" name="id" readonly>
                     </div>
+
                     <div class="col-md-6">
                         <label for="identificacion" class="form-label">Identificación</label>
                         <input type="text" class="form-control" name="identificacion" required>
@@ -141,29 +159,37 @@
                     </div>
                     <div class="col-md-6">
                         <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" name="apellido" required>
+                        <input type="text" class="form-control" name="apellido"  required>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="selectEspecialidad" class="form-label">Eliga la Especialidad</label>
+                        <select class="form-select" name="EspecialidadId" id="selectEspecialidadEditar" required>
+                            <option value="">Seleccione la Especialidad</option>
+                        </select>
+                    </div>
+
                     <div class="col-md-6">
-                        <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" name="fechanacimiento" required>
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" name="telefono" placeholder="Ingrese el teléfono" required>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="email" placeholder="Ingrese el correo" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" name="telefono" required>
-                    </div>
-                    <div class="col-12">
-                        <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" name="direccion" required>
+                    <div class="mb-3">
+                        <label for="selectEspecialidadActivo" class="form-label">Disponible</label>
+                        <select class="form-select" name="Activo" id="selectEspecialidadActivoEditar">
+                            <option value="">Seleccione la especialidad</option>
+                            <option value="0">No disponible</option>
+                            <option value="1">Disponible</option>
+                        </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formEditarPaciente')">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="editarPaciente()">Editar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limpiarDatos('formEditarMedico')">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="editarMedico()">Editar</button>
             </div>
         </div>
     </div>
@@ -175,4 +201,4 @@
 </div>
 
 <script src="~/js/generico.js"></script>
-<script src="~/js/medico.jss"></script>
+<script src="~/js/medico.js"></script>

@@ -74,9 +74,9 @@ namespace CapaDatos
             }
         }
 
-        public void EliminarEspecialidad(int id)
+        public void EliminarEspecialidad(EspecialidadCLS especialidad)
         {
-            _context.Database.ExecuteSqlRaw("EXEC uspEliminarEspecialidad @p0", id);
+            _context.Database.ExecuteSqlRaw("EXEC uspEliminarEspecialidad @p0", especialidad.Id);
         }
 
     }
