@@ -54,7 +54,7 @@ namespace CapaDatos
         public AdministradorCLS RecuperarAdministrador(int id)
         {
             return _context.Administradores
-                .FromSqlRaw("EXEC uspRecuperarAdministrador @p0", id)
+                .FromSqlRaw("EXEC uspObtenerAdministradorPorId @p0", id)
                 .AsEnumerable()
                 .FirstOrDefault(); // Para obtener un solo objeto en lugar de una lista
         }

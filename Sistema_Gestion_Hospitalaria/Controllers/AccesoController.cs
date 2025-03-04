@@ -9,7 +9,6 @@ namespace CapaPresentacion.Controllers
     {
         private readonly AdministradorBL _administradorBL;
 
-        // Inyección de dependencia
         public AccesoController(AdministradorBL administradorBL)
         {
             _administradorBL = administradorBL;
@@ -43,6 +42,8 @@ namespace CapaPresentacion.Controllers
                 return RedirectToAction("Index");
             }
 
+            HttpContext.Session.SetInt32("AdminId", oAdministrador.Id);
+            Console.WriteLine($"ID guardado: {oAdministrador.Id}");
             return RedirectToAction("Index", "Home");
         }
 

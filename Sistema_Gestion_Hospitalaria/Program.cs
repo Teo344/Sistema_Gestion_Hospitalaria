@@ -21,6 +21,13 @@ builder.Services.AddScoped<MedicoBL>();
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
+    options.Cookie.HttpOnly = true; // La cookie solo es accesible desde el servidor
+    options.Cookie.IsEssential = true; // La cookie es esencial para el funcionamiento de la aplicación
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -33,6 +40,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseRouting();
