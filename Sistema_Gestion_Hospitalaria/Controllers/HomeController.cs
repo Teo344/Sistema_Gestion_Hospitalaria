@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Sistema_Gestion_Hospitalaria.Models;
 using CapaNegocios;
+using CapaEntidades;
 
 namespace CapaPresentacion.Controllers
 {
@@ -30,6 +31,17 @@ namespace CapaPresentacion.Controllers
         {
             CargarTotales();
             return View();
+        }
+
+        public IActionResult ObtenerAdministradores()
+        {
+            var administradores = _administradorBL.ObtenerAdministradores();
+            return Json(administradores);
+        }
+
+        public int AgregarAdministrador(AdministradorCLS administrador)
+        {
+            return _administradorBL.AgregarAdministrador(administrador);
         }
     }
 }

@@ -5,57 +5,116 @@
 <h1>Dashboard</h1>
 
 <div class="row mt-3">
-    <div class="col-md-4 py-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h3 class="card-title">Total de Pacientes</h3>
-                <h5 class="card-text">@ViewBag.TotalPacientes</h5>
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-white bg-primary bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Pacientes</h4>
+                <h6 class="card-text">@ViewBag.TotalPacientes</h6>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 py-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h3 class="card-title">Total de Médicos</h3>
-                <h5 class="card-text">@ViewBag.TotalMedicos</h5>
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-white bg-primary bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Médicos</h4>
+                <h6 class="card-text">@ViewBag.TotalMedicos</h6>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 py-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h3 class="card-title">Total de Especialidades</h3>
-                <h5 class="card-text">@ViewBag.TotalEspecialidades</h5>
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-white bg-success bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Especialidades</h4>
+                <h6 class="card-text">@ViewBag.TotalEspecialidades</h6>
             </div>
         </div>
     </div>
-    <div class="col-md-4 py-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h3 class="card-title">Total de Citas</h3>
-                <h5 class="card-text">@ViewBag.TotalCitas</h5>
+
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-white bg-success bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Citas</h4>
+                <h6 class="card-text">@ViewBag.TotalCitas</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-dark bg-warning bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Ingreso Mensual</h4>
+                <h6 class="card-text">@ViewBag.TotalIngresoMes</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 d-flex mb-3">
+        <div class="card text-dark bg-warning bg-gradient shadow-lg w-100 h-100">
+            <div class="card-body text-center">
+                <h4 class="card-title">Total de Ingresos</h4>
+                <h6 class="card-text">@ViewBag.TotalIngreso</h6>
             </div>
         </div>
     </div>
 </div>
 
-<div class ="row mt-4">
-    <div class="col-md-4 py-3">
-        <div class="card text-dark bg-warning ">
-            <div class="card-body">
-                <h3 class="card-title">Total de Ingreso Mensual</h3>
-                <h5 class="card-text">@ViewBag.TotalIngresoMes</h5>
+
+
+<button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#modalAgregarAdministrador">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+    </svg> Agregar Nuevo Administrador
+</button>
+
+<div class="modal fade" id="modalAgregarAdministrador" tabindex="-1" aria-labelledby="modalAgregarAdministradorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAgregarAdministradorLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                    </svg> Agregar Nuevo Administrador
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4 py-3">
-        <div class="card text-dark bg-warning ">
-            <div class="card-body">
-                <h3 class="card-title">Total de Ingresos</h3>
-                <h5 class="card-text">@ViewBag.TotalIngreso</h5>
+            <div class="modal-body">
+                <form id="formAgregarAdministrador" class="row g-3">
+                    <div class="col-md-12">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" name="email" placeholder="Ingrese el correo" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="clave" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="clave" placeholder="Ingrese la contraseña" required>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarAdministrador()">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+
+<h3>Lista de Administradores</h3>
+
+<div id="divTable" class="mt-4">
+    <div id="divContenedorTabla"></div>
+</div>
+
+<script src="~/js/generico.js"></script>
+<script src="~/js/home.js"></script>

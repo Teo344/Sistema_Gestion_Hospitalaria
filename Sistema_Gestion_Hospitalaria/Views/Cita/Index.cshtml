@@ -18,31 +18,25 @@
 <fieldset class="p-3 my-3 border border-primary rounded">
     <legend class="float-none w-auto text-primary fw-bold">Buscar Citas</legend>
     <form id="formBusquedaCita" method="post" class="row g-3">
-        <div class="col-md-6">
-            <label for="pacienteIdentificacion" class="form-label">Cédula de Identificación del Paciente</label>
-            <input type="text" class="form-control" name="pacienteIdentificacion" placeholder="Ingrese la cédula de identificación del paciente"
-                pattern="\d{10}" title="La cédula debe tener exactamente 10 dígitos" required>
-        </div>
-        <div class="col-md-6">
-            <label for="medicoIdentificacion" class="form-label">Cédula de Identificación del Médico</label>
-            <input type="text" class="form-control" name="medicoIdentificacion" placeholder="Ingrese la cédula de identificación del médico"
-                pattern="\d{10}" title="La cédula debe tener exactamente 10 dígitos" required>
+        <div class="col-md-4">
+            <label for="pacienteIdentificacion" class="form-label">Identificación del Paciente</label>
+            <input type="text" class="form-control" name="pacienteIdentificacion" placeholder="Ingrese la identificación del paciente">
         </div>
         <div class="col-md-4">
-            <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-            <input type="datetime-local" class="form-control" name="fechaInicio">
+            <label for="medicoIdentificacion" class="form-label">Identificación del Médico</label>
+            <input type="text" class="form-control" name="medicoIdentificacion" placeholder="Ingrese la identificación del médico">
         </div>
         <div class="col-md-4">
-            <label for="fechaFin" class="form-label">Fecha Fin</label>
-            <input type="datetime-local" class="form-control" name="fechaFin">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" name="fecha">
         </div>
         <div class="col-md-4">
             <label for="estado" class="form-label">Estado</label>
             <select class="form-select" name="estado">
                 <option value="">Seleccione un estado</option>
-                <option value="Programado">Programado</option>
-                <option value="Cancelado">Cancelado</option>
-                <option value="Realizado">Realizado</option>
+                <option value="Programada">Programada</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Completada">Completada</option>
             </select>
         </div>
         <div class="col-12 d-flex gap-2">
@@ -59,8 +53,6 @@
         </div>
     </form>
 </fieldset>
-
-
 
 <div class="modal fade" id="modalAgregarCita" tabindex="-1" aria-labelledby="modalAgregarCitaLabel" aria-hidden="true">
     <div class="modal-dialog">

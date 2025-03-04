@@ -13,7 +13,6 @@ namespace CapaPresentacion.Controllers
             _tratamientoBL = tratamientoBL;
         }
 
-        // Acción para mostrar la vista principal
         public ActionResult Index()
         {
             return View();

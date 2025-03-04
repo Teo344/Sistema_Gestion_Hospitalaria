@@ -12,7 +12,7 @@ builder.Services.AddScoped<EspecialidadBL>();
 builder.Services.AddScoped<TratamientoDAL>();  
 builder.Services.AddScoped<TratamientoBL>();
 builder.Services.AddScoped<AdministradorDAL>();
-builder.Services.AddScoped<AdministradorBL>();
+builder.Services.AddScoped<AdministradorBL>(); 
 builder.Services.AddScoped<CitaDAL>();
 builder.Services.AddScoped<CitaBL>();
 builder.Services.AddScoped<MedicoDAL>();
@@ -22,6 +22,13 @@ builder.Services.AddScoped<FacturacionBL>();
 
 builder.Services.AddDbContext<HospitalDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HospitalDB")));
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
+    options.Cookie.HttpOnly = true; // La cookie solo es accesible desde el servidor
+    options.Cookie.IsEssential = true; // La cookie es esencial para el funcionamiento de la aplicación
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -36,6 +43,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -45,7 +54,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Acceso}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

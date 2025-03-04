@@ -26,18 +26,42 @@ CREATE PROCEDURE [dbo].[uspActualizarAdministrador]
     @Id INT,
     @Nombre NVARCHAR(100),
     @Apellido NVARCHAR(100),
-    @Clave NVARCHAR(255),
     @Email NVARCHAR(100)
 AS
 BEGIN
     UPDATE Administradores
     SET Nombre = @Nombre,
         Apellido = @Apellido,
-        Clave = @Clave,
         Email = @Email
     WHERE Id = @Id;
 END;
 GO
+
+USE [HospitalDB]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[uspActualizarClaveAdministrador]
+    @Id INT,
+    @Clave NVARCHAR(255)
+AS
+BEGIN
+    UPDATE Administradores
+    SET Clave = @Clave
+    WHERE Id = @Id;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[uspObtenerAdministradorPorId]
+    @Id INT
+AS
+BEGIN
+    SELECT Id, Nombre, Apellido, Clave, Email
+    FROM Administradores
+    WHERE Id = @Id;
+END;
 
 USE [HospitalDB]
 GO

@@ -1,0 +1,68 @@
+﻿@model CapaEntidades.AdministradorCLS
+
+@{
+    ViewData["Title"] = "Configuración del Administrador";
+}
+
+<h1>Configuración del Administrador</h1>
+
+<!-- Mensajes de éxito o error -->
+<div id="mensaje" class="alert" style="display: none;"></div>
+
+<form id="formEditarAdministrador" class="p-4 border rounded bg-light mt-3">
+    <h3 class="mb-3 text-primary">Editar Administrador</h3>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" id="id" class="form-control" name="id" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" id="apellido" name="apellido" class="form-control" required>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary w-100" onclick="actualizarAdministrador()">
+        <i class="fas fa-save"></i> Guardar Cambios
+    </button>
+</form>
+
+<hr />
+
+<!-- Formulario para cambiar la contraseña -->
+<form id="formCambiarClave" class="p-4 border rounded bg-light mt-4">
+    <h3 class="mb-3 text-warning">Cambiar Contraseña</h3>
+    <input type="text" id="idClave" name="id" style="display: none;">
+    <div class="mb-3">
+        <label for="nuevaClave" class="form-label">Nueva Contraseña</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" id="nuevaClave" name="nuevaClave" class="form-control" required>
+        </div>
+    </div>
+    <button type="button" class="btn btn-warning w-100" onclick="cambiarClave()">
+        <i class="fas fa-key"></i> Cambiar Contraseña
+    </button>
+</form>
+
+
+<script src="~/js/generico.js"></script>
+<script src="~/js/administrador.js"></script>
