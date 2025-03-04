@@ -104,6 +104,189 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+    /* Modo oscuro */
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+/* Contenedor responsivo de la tabla */
+.dark-mode .table-responsive {
+    background-color: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Tabla en modo oscuro */
+.dark-mode .table {
+    color: #ffffff;
+    background-color: #1e1e1e;
+    border-color: #444;
+}
+
+    /* Encabezado de la tabla */
+    .dark-mode .table thead {
+        background-color: #333;
+        color: #ffffff;
+    }
+
+        /* Celdas del encabezado */
+        .dark-mode .table thead th {
+            border-color: #555;
+        }
+
+    /* Filas de la tabla */
+    .dark-mode .table tbody tr {
+        background-color: #222;
+        transition: background 0.3s ease-in-out;
+    }
+
+        /* Alternar colores en filas */
+        .dark-mode .table tbody tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+    /* Bordes de las celdas */
+    .dark-mode .table td,
+    .dark-mode .table th {
+        border-color: #444;
+    }
+
+    /* Hover en filas */
+    .dark-mode .table tbody tr:hover {
+        background-color: #3a3a3a;
+    }
+
+
+/* Botones dentro de la tabla */
+.dark-mode .btn-success {
+    background-color: #1f7a1f;
+    border-color: #146314;
+}
+
+.dark-mode .btn-primary {
+    background-color: #1f4b99;
+    border-color: #123d7a;
+}
+
+.dark-mode .btn-danger {
+    background-color: #992020;
+    border-color: #7a1616;
+}
+
+/* Iconos dentro de los botones */
+.dark-mode .btn svg {
+    fill: #ffffff;
+}
+
+.dark-mode .table,
+.dark-mode .table td,
+.dark-mode .table th {
+    color: #ffffff !important;
+}
+
+.dark-mode footer {
+    background-color: #1e1e1e !important; /* Sobrescribe bg-light */
+    color: white !important;
+}
+
+    .dark-mode footer a {
+        color: #bbbbbb;
+    }
+
+        .dark-mode footer a:hover {
+            color: #ffffff;
+        }
+
+.dark-mode .text-muted {
+    color: #cccccc !important; /* Un gris más claro para mayor visibilidad */
+}
+
+/* Estilo general del modal en modo oscuro */
+.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+/* Header del modal en modo oscuro */
+.dark-mode .modal-header {
+    background-color: #2a2a2a;
+    border-bottom: 1px solid #555;
+}
+
+    /* Botón de cierre del modal en modo oscuro */
+    .dark-mode .modal-header .btn-close {
+        filter: invert(1);
+    }
+
+/* Cuerpo del modal en modo oscuro */
+.dark-mode .modal-body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Footer del modal en modo oscuro */
+.dark-mode .modal-footer {
+    background-color: #2a2a2a;
+    border-top: 1px solid #555;
+}
+
+/* Inputs dentro del modal */
+.dark-mode .modal-body input,
+.dark-mode .modal-body textarea,
+.dark-mode .modal-body select {
+    background-color: #222;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+/* Botones dentro del modal */
+.dark-mode .modal-footer button {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+    .dark-mode .modal-footer button:hover {
+        background-color: #444;
+    }
+    
+
+/* Inputs en modo oscuro */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+    background-color: #222;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+    .dark-mode input::placeholder,
+    .dark-mode textarea::placeholder {
+        color: #bbbbbb;
+    }
+
+    /* Bordes de los inputs al hacer focus */
+    .dark-mode input:focus,
+    .dark-mode textarea:focus,
+    .dark-mode select:focus {
+        border-color: #777;
+        outline: none;
+    }
+
+/* Estilos para botones en modo oscuro */
+.dark-mode button {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+    .dark-mode button:hover {
+        background-color: #444;
+    }
+
+
 .bg-login {
     background: rgb(20,42,109);
     background: linear-gradient(55deg, rgba(20,42,109,1) 0%, rgba(49,81,174,1) 30%, rgba(78,115,223,1) 100%);
