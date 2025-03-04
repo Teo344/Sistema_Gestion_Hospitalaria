@@ -1,4 +1,5 @@
 ﻿using CapaEntidades;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,22 @@ namespace CapaDatos
 
         public void EliminarEspecialidad(EspecialidadCLS especialidad)
         {
-            _context.Database.ExecuteSqlRaw("EXEC uspEliminarEspecialidad @p0", especialidad.Id);
+            try
+            {
+                _context.Database.ExecuteSqlRaw("EXEC uspEliminarEspecialidad @p0", especialidad.Id);
+            }
+            catch (SqlException sqlEx)
+            {
+                // Capturar específicamente errores SQL
+                throw new Exception("Error al intentar eliminar la especialidad. Detalles: " + sqlEx.Message, sqlEx);
+            }
+            catch (Exception ex)
+            {
+                // Capturar cualquier otro error
+                throw new Exception("Ocurrió un error inesperado: " + ex.Message, ex);
+            }
         }
+
 
     }
 }
