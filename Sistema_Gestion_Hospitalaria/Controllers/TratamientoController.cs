@@ -1,6 +1,7 @@
 ﻿using CapaNegocios;
 using CapaEntidades;
 using Microsoft.AspNetCore.Mvc;
+using CapaDatos;
 
 namespace CapaPresentacion.Controllers
 {
@@ -54,6 +55,11 @@ namespace CapaPresentacion.Controllers
         public int EliminarTratamiento(TratamientoCLS tratamiento)
         {
             return _tratamientoBL.EliminarTratamiento(tratamiento);
+        }
+
+        public List<TratamientoCLS> ObtenerTratamientosPorPaciente(string identificacion)
+        {
+            return _tratamientoBL.ObtenerTratamientosPorPaciente(identificacion);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CapaEntidades;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace CapaDatos
@@ -94,5 +95,16 @@ namespace CapaDatos
         {
             _context.Database.ExecuteSqlRaw("EXEC uspEliminarTratamiento @p0", tratamiento.Id);
         }
+
+
+        public List<TratamientoCLS> ObtenerTratamientosPorPaciente(string identificacion)
+        {
+            var lista = _context.Tratamientos
+                .FromSqlRaw("EXEC uspObtenerTratamientosPorPaciente @Identificacion", new SqlParameter("@Identificacion", identificacion))
+                .ToList();
+            return lista;
+        }
+
+
     }
 }

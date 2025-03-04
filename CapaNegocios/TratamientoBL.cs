@@ -132,5 +132,13 @@ namespace CapaNegocios
 
             return true;
         }
+
+
+        public List<TratamientoCLS> ObtenerTratamientosPorPaciente(string identificacion)
+        {
+            return _tratamientoDAL.ObtenerTratamientosPorPaciente(identificacion);
+        }
+
+
     }
 }

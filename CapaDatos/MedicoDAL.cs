@@ -32,12 +32,6 @@ namespace CapaDatos
         public List<MedicoCLS> FiltrarMedico(MedicoCLS objMedico)
         {
 
-            Console.WriteLine($"Nombre: {objMedico.Nombre}");
-            Console.WriteLine($"Apellido: {objMedico.Apellido}");
-            Console.WriteLine($"Identificación: {objMedico.Identificacion}");
-            Console.WriteLine($"EspecialidadId: {objMedico.EspecialidadId}");
-            Console.WriteLine($"Activo: {objMedico.Activo}");
-
 
             List<MedicoCLS> lista = new List<MedicoCLS>();
             lista = _context.Medicos
