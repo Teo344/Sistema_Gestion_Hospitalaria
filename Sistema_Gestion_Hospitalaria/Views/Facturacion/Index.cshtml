@@ -78,9 +78,16 @@
                    
 
                     <div class="col-md-6">
-                        <label for="metodoPago" class="form-label">Metodo de Pago</label>
-                        <input type="text" class="form-control" name="MetodoPago" placeholder="Ingrese Metodo de pago" required>
-                    </div>
+        <label for="metodoPago" class="form-label">Método de Pago</label>
+    <select class="form-control" name="MetodoPago" required>
+        <option value="" disabled selected>Seleccione un método de pago</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="TarjetaCredito">Tarjeta de Crédito</option>
+        <option value="TarjetaDebito">Tarjeta de Débito</option>
+        <option value="Transferencia">Transferencia</option>
+    </select>
+</div>
+
 
 
                     <div class="col-md-6">
